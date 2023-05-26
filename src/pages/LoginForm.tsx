@@ -1,13 +1,18 @@
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from "react-hook-form";
 
-const LoginForm = () => {
+interface LoginFormValues {
+  email: string;
+  password: string;
+}
+
+const LoginForm: React.FC = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<LoginFormValues>();
 
-  const onSubmit = (data: any) => {
+  const onSubmit: SubmitHandler<LoginFormValues> = (data) => {
     console.log(data); // Replace with your desired login logic
   };
   console.log(errors);
@@ -15,19 +20,21 @@ const LoginForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col items-center mt-8"
+      className="mt-8 flex flex-col items-center rounded border-2 p-4"
     >
-      <div className="relative z-0 w-full mb-5">
+      <div
+        className={`relative z-0 w-full ${!errors.email ? "mb-11" : "mb-5"}`}
+      >
         <input
           type="text"
-          {...register('email', { required: true, pattern: '/^S+@S+$/i' })}
+          {...register("email", { required: true, pattern: /^.+@.+\..+$/i })}
           name="email"
           placeholder=" "
-          className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+          className="mt-0 block w-full appearance-none border-0 border-b-2 border-gray-200 bg-transparent px-0 pb-2 pt-3 focus:border-black focus:outline-none focus:ring-0"
         />
         <label
-          for="email"
-          className="absolute duration-300 top-3 -z-1 origin-0 text-gray-500"
+          htmlFor="email"
+          className="-z-1 origin-0 absolute top-3 text-gray-500 duration-300"
         >
           Email
         </label>
@@ -38,20 +45,22 @@ const LoginForm = () => {
         )}
       </div>
 
-      <div className="relative z-0 w-full mb-5">
+      <div
+        className={`relative z-0  w-full ${!errors.email ? "mb-11" : "mb-5"}`}
+      >
         <input
           type="password"
-          {...register('password', {
-            required: 'password is required',
-            minLength: { value: '8', message: 'min 8 character' },
+          {...register("password", {
+            required: "password is required",
+            minLength: { value: 8, message: "min 8 character" },
           })}
           name="password"
           placeholder=" "
-          className="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none focus:outline-none focus:ring-0 focus:border-black border-gray-200"
+          className="mt-0 block w-full appearance-none border-0 border-b-2 border-gray-200 bg-transparent px-0 pb-2 pt-3 focus:border-black focus:outline-none focus:ring-0"
         />
         <label
-          for="password"
-          className="absolute duration-300 top-3 -z-1 origin-0 text-gray-500"
+          htmlFor="password"
+          className="-z-1 origin-0 absolute top-3 text-gray-500 duration-300"
         >
           Password
         </label>
@@ -64,7 +73,7 @@ const LoginForm = () => {
 
       <button
         type="submit"
-        className="bg-blue-500 text-white rounded px-4 py-2"
+        className="rounded bg-blue-500 px-4 py-2 text-white"
       >
         Submit
       </button>

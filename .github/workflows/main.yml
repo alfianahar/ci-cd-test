@@ -1,0 +1,46 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - development
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build project
+        run: yarn build
+
+  stage:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set Git author
+        run: |
+          export GIT_AUTHOR_NAME="alfianahar"
+          export GIT_AUTHOR_EMAIL="alfian.aswinda@gmail.com"
+          git config user.name "$GIT_AUTHOR_NAME"
+          git config user.email "$GIT_AUTHOR_EMAIL"
+
+      - name: Checkout branch
+        run: |
+          git fetch
+          git checkout main
+          git branch --show-current
+
+      - name: Merge branch
+        run: |
+          git merge --no-ff --allow-unrelated-histories development
+          git push origin main
