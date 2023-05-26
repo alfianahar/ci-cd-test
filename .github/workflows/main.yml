@@ -29,6 +29,7 @@ jobs:
 
       - name: Check current branch
         run: |
+          git fetch
           git checkout main
           git branch --show-current
 
