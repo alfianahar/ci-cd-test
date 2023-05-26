@@ -35,5 +35,5 @@ jobs:
 
       - name: Merge branch
         run: |
-          git merge development
+          git merge --no-ff development
           git push origin main
