@@ -27,6 +27,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Check current branch
+        uses: git branch --show-current
+
       - name: Merge branch
         run: |
           git checkout main
