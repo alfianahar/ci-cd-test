@@ -42,5 +42,5 @@ jobs:
 
       - name: Merge branch
         run: |
-          git merge --no-ff --allow-unrelated-histories development
+          git merge ${{ github.head_ref }}
           git push origin main
