@@ -22,7 +22,9 @@ const LoginForm: React.FC = () => {
       onSubmit={handleSubmit(onSubmit)}
       className="mt-8 flex flex-col items-center rounded border-2 p-4"
     >
-      <div className="relative z-0 mb-5 w-full ">
+      <div
+        className={`relative z-0 w-full ${!errors.email ? "mb-11" : "mb-5"}`}
+      >
         <input
           type="text"
           {...register("email", { required: true, pattern: /^.+@.+\..+$/i })}
@@ -43,7 +45,9 @@ const LoginForm: React.FC = () => {
         )}
       </div>
 
-      <div className="relative z-0 mb-5 w-full">
+      <div
+        className={`relative z-0  w-full ${!errors.email ? "mb-11" : "mb-5"}`}
+      >
         <input
           type="password"
           {...register("password", {
