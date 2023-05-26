@@ -5,7 +5,7 @@ function App() {
   return (
     <>
       <div className="flex h-screen flex-col items-center justify-center">
-        <h1 className="font-sans text-lg font-extrabold">Simple Login Form</h1>
+        <h1 className="font-sans text-lg font-bold">Simple Login Form</h1>
         <LoginForm />
       </div>
     </>
