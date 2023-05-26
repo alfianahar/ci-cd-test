@@ -42,5 +42,5 @@ jobs:
 
       - name: Merge branch
         run: |
-          git merge development
+          git merge development --allow-unrelated-histories
           git push origin main
