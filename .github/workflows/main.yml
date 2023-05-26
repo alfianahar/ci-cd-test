@@ -42,5 +42,5 @@ jobs:
 
       - name: Merge branch
         run: |
-          git merge ${{ github.head_ref }}
+          git merge development
           git push origin main
