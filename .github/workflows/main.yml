@@ -27,7 +27,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Check current branch
+      - name: Checkout branch
         run: |
           git fetch
           git checkout main
@@ -35,5 +35,5 @@ jobs:
 
       - name: Merge branch
         run: |
-          git merge ${{ github.head_ref }}
+          git merge development
           git push origin main
