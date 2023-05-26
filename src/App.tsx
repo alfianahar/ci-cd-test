@@ -12,5 +12,4 @@ function App() {
     </>
   );
 }
-o;
 export default App;
