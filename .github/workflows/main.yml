@@ -29,6 +29,6 @@ jobs:
 
       - name: Merge branch
         run: |
-          git checkout -b staging
+          git checkout main
           git merge --no-ff ${{ github.head_ref }}
-          git push origin staging
+          git push origin main
