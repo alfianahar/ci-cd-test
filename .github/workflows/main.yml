@@ -19,7 +19,7 @@ jobs:
       - name: Build project
         run: yarn build
 
-  stage:
+  pull:
     needs: build
     runs-on: ubuntu-latest
 
@@ -34,6 +34,11 @@ jobs:
           git config user.name "$GIT_AUTHOR_NAME"
           git config user.email "$GIT_AUTHOR_EMAIL"
 
+      - name: Checkout branch
+        run: |
+          git fetch
+          git checkout main
+
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3.11.0
         with:
@@ -41,3 +46,16 @@ jobs:
           branch: development
           title: "Merge development into main"
           body: "This pull request merges changes from the development branch into the main branch."
+
+  fetch:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Fetch repository back to development
+        uses: actions/checkout@v2
+
+      - name: Checkout branch and fetch
+        run: |
+          git checkout development     
+          git fetch
