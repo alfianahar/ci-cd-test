@@ -29,7 +29,7 @@ function App() {
   return (
     <>
       <div className="flex h-screen flex-col items-center justify-center bg-[conic-gradient(at_top,_var(--tw-gradient-stops))] from-yellow-200 via-emerald-200 to-yellow-200">
-        <h1 className="font-sans text-lg font-bold">Minimalist Login Form</h1>
+        <h1 className="font-mono text-lg font-bold">Minimalist Login Form</h1>
         <LoginForm />
 
         <footer className="mt-5">
