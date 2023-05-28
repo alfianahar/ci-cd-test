@@ -16,10 +16,14 @@ function App() {
     const postsData = fetchData("posts");
 
     const [users, posts] = await Promise.all([usersData, postsData]);
+
+    console.log(users);
+    console.log(posts);
   };
 
   useEffect(() => {
     pararel();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
