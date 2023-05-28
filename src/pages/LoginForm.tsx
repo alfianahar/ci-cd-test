@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 interface LoginFormValues {
@@ -9,18 +10,25 @@ const LoginForm: React.FC = () => {
   const {
     register,
     handleSubmit,
+    reset,
+    formState,
     formState: { errors },
   } = useForm<LoginFormValues>();
 
   const onSubmit: SubmitHandler<LoginFormValues> = (data) => {
-    console.log(data); // Replace with your desired login logic
+    alert(`Welcome, ${data.email}`);
   };
-  console.log(errors);
+
+  useEffect(() => {
+    if (formState.isSubmitSuccessful) {
+      reset({ email: "", password: "" });
+    }
+  }, [formState, reset]);
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mt-8 flex flex-col items-center rounded border-2 p-4"
+      className="mt-8 flex flex-col items-center rounded border-2 border-gray-600 p-10"
     >
       <div
         className={`relative z-0 w-full ${!errors.email ? "mb-11" : "mb-5"}`}
@@ -30,11 +38,11 @@ const LoginForm: React.FC = () => {
           {...register("email", { required: true, pattern: /^.+@.+\..+$/i })}
           name="email"
           placeholder=" "
-          className="mt-0 block w-full appearance-none border-0 border-b-2 border-gray-200 bg-transparent px-0 pb-2 pt-3 focus:border-black focus:outline-none focus:ring-0"
+          className="mt-0 block w-full appearance-none border-0 border-b-2 border-gray-600 bg-transparent px-0 pb-2 pt-3 focus:border-blue-400 focus:outline-none focus:ring-0"
         />
         <label
           htmlFor="email"
-          className="-z-1 origin-0 absolute top-3 text-gray-500 duration-300"
+          className="-z-1 origin-0 absolute top-3 text-gray-700 duration-300"
         >
           Email
         </label>
@@ -56,11 +64,11 @@ const LoginForm: React.FC = () => {
           })}
           name="password"
           placeholder=" "
-          className="mt-0 block w-full appearance-none border-0 border-b-2 border-gray-200 bg-transparent px-0 pb-2 pt-3 focus:border-black focus:outline-none focus:ring-0"
+          className="mt-0 block w-full appearance-none border-0 border-b-2 border-gray-600 bg-transparent px-0 pb-2 pt-3 focus:border-blue-400 focus:outline-none focus:ring-0"
         />
         <label
           htmlFor="password"
-          className="-z-1 origin-0 absolute top-3 text-gray-500 duration-300"
+          className="-z-1 origin-0 absolute top-3 text-gray-700 duration-300"
         >
           Password
         </label>
