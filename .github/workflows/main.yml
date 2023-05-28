@@ -19,7 +19,7 @@ jobs:
       - name: Build project
         run: yarn build
 
-  pull:
+  pull-merge:
     needs: build
     runs-on: ubuntu-latest
 
@@ -46,14 +46,6 @@ jobs:
           branch: development
           title: "Merge development into main"
           body: "This pull request merges changes from the development branch into the main branch."
-
-  fetch:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Fetch repository back to development
-        uses: actions/checkout@v2
 
       - name: Checkout branch and fetch
         run: |
